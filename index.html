@@ -1051,9 +1051,23 @@
                 if (layer.getTooltip && layer.getTooltip()) {
                     var tooltip = layer.getTooltip();
                     var content = tooltip.getContent();
-                    var m = content.match(/\((\d+)\)/);
-                    if (m && brandData[m[1]]) {
-                        tooltip.setContent(content + '<br>' + brandData[m[1]]);
+                    var parts = content.match(/<div>\s*(.*?)\s*\((\d+)\)<br>(.*?)<\/div>/);
+                    if (parts) {
+                        var branchName = parts[1].trim();
+                        var branchNum = parts[2];
+                        var address = parts[3].trim();
+                        var brands = brandData[branchNum];
+                        var brandList = '';
+                        if (brands) {
+                            brandList = '<br><ul style="margin:0;padding-left:1em;">' +
+                                brands.split(',').map(function(b) {
+                                    return '<li>' + b.trim() + '</li>';
+                                }).join('') + '</ul>';
+                        }
+                        tooltip.setContent(
+                            '<div><strong>' + branchName + ' (' + branchNum + ')</strong><br>' +
+                            address + brandList + '</div>'
+                        );
                     }
                 }
             });
