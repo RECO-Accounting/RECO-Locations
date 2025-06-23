@@ -1008,6 +1008,55 @@
                  </div>`,
                 {"sticky": true}
             );
+
+            // Append brand information to each location tooltip
+            var brandData = {
+                "01": "Bobcat, Hitachi (Excavators, Loaders), Liehberr, Linkbelt, Terex",
+                "02": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "03": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "04": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "05": "Bobcat",
+                "08": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "09": "Hitachi (Excavators, Loaders), Linkbelt, Terex",
+                "12": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "14": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt",
+                "15": "Bobcat",
+                "16": "Bobcat",
+                "18": "Liehberr",
+                "19": "Hitachi (Excavators), Liehberr, Linkbelt",
+                "20": "Liehberr",
+                "22": "Hitachi (Loaders), Liehberr, Linkbelt",
+                "23": "Hitachi (Excavators), Liehberr, Linkbelt",
+                "24": "Liehberr",
+                "27": "Hitachi (Excavators, Loaders), Liehberr",
+                "67": "Bobcat",
+                "68": "Bobcat",
+                "69": "Bobcat",
+                "70": "Bobcat",
+                "71": "Bobcat",
+                "73": "Bobcat",
+                "74": "Bobcat",
+                "75": "Bobcat",
+                "77": "Hitachi (Loaders)",
+                "91": "Gradall, Hitachi (Excavators, Loaders), Kaiser, Liehberr, Linkbelt, Sakai, Vacall",
+                "92": "Gradall, Hitachi (Excavators, Loaders), Liehberr, Linkbelt, Sakai",
+                "93": "Gradall, Hitachi (Excavators, Loaders), Liehberr, Linkbelt, Sakai, Vacall",
+                "94": "Gradall, Hitachi (Excavators, Loaders), Kaiser, Liehberr, Linkbelt, Vacall",
+                "95": "Hitachi (Excavators, Loaders), Liehberr, Linkbelt, Sakai",
+                "96": "Hitachi (Excavators), Liehberr",
+                "97": "Gradall, Hitachi (Excavators, Loaders), Liehberr, Linkbelt"
+            };
+
+            map_7b6beab4b40e6e56a6deaff395b94a9a.eachLayer(function(layer) {
+                if (layer.getTooltip && layer.getTooltip()) {
+                    var tooltip = layer.getTooltip();
+                    var content = tooltip.getContent();
+                    var m = content.match(/\((\d+)\)/);
+                    if (m && brandData[m[1]]) {
+                        tooltip.setContent(content + '<br>' + brandData[m[1]]);
+                    }
+                }
+            });
         
 </script>
 </html>
